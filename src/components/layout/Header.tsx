@@ -157,7 +157,7 @@ export function Header() {
   };
 
   return (
-    <header ref={headerRef} className="bg-primary-900 text-white sticky top-0 z-50 shadow-xl">
+    <header ref={headerRef} className="bg-primary-900 text-white sticky top-0 z-50 shadow-xl w-full max-w-full overflow-x-hidden">
       {/* Top bar */}
       <div className="bg-primary-950 border-b border-primary-800/50">
         <div className="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between text-xs text-primary-300">
@@ -192,8 +192,8 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Search bar */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
+          {/* Search bar — min-w-0 on form AND input prevents horizontal overflow on mobile */}
+          <form onSubmit={handleSearch} className="flex-1 max-w-2xl min-w-0">
             <div className={`flex rounded-xl overflow-hidden ring-2 transition-all duration-200 ${searchFocused ? 'ring-accent-400 shadow-lg shadow-accent-500/20' : 'ring-transparent'}`}>
               <input
                 type="text"
@@ -201,14 +201,14 @@ export function Header() {
                 onChange={e => setSearchQuery(e.target.value)}
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
-                placeholder="Buscar produtos, marcas e muito mais..."
-                className="flex-1 px-4 py-2.5 text-gray-900 text-sm focus:outline-none placeholder:text-gray-400"
+                placeholder="Buscar produtos..."
+                className="flex-1 min-w-0 px-3 py-2.5 text-gray-900 text-sm focus:outline-none placeholder:text-gray-400"
               />
               <button
                 type="submit"
-                className="bg-accent-500 hover:bg-accent-400 px-5 py-2.5 transition-colors flex items-center gap-2 font-medium text-sm"
+                className="flex-shrink-0 bg-accent-500 hover:bg-accent-400 px-4 py-2.5 transition-colors flex items-center gap-1.5 font-medium text-sm"
               >
-                <Search size={18} />
+                <Search size={17} />
                 <span className="hidden md:inline">Buscar</span>
               </button>
             </div>
@@ -411,20 +411,20 @@ export function Header() {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-screen' : 'max-h-0'}`}>
-        <div className="bg-primary-800 border-t border-primary-700">
+      <div className={`md:hidden w-full overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-screen' : 'max-h-0'}`}>
+        <div className="w-full bg-primary-800 border-t border-primary-700">
           {/* Mobile search */}
           <div className="px-4 pt-3 pb-2">
-            <form onSubmit={handleSearch}>
-              <div className="flex rounded-xl overflow-hidden">
+            <form onSubmit={handleSearch} className="w-full">
+              <div className="flex rounded-xl overflow-hidden w-full">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Buscar produtos..."
-                  className="flex-1 px-4 py-2.5 text-gray-900 text-sm focus:outline-none"
+                  className="flex-1 min-w-0 px-4 py-2.5 text-gray-900 text-sm focus:outline-none"
                 />
-                <button type="submit" className="bg-accent-500 px-4">
+                <button type="submit" className="flex-shrink-0 bg-accent-500 px-4">
                   <Search size={18} />
                 </button>
               </div>
