@@ -114,15 +114,15 @@ export function Home() {
         <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-white/5" />
         <div className="absolute right-10 -bottom-10 w-48 h-48 rounded-full bg-white/5" />
 
-        {/* Content */}
+        {/* Content — left padding accounts for the arrow button width on mobile */}
         <div className="absolute inset-0 flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full">
+          <div className="max-w-7xl mx-auto px-12 sm:px-10 md:px-8 w-full">
             <div key={`content-${bannerKey}`} className="max-w-xl animate-slide-up">
               <span className="inline-block bg-white/15 backdrop-blur-sm text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 border border-white/20">
                 {banner.tag}
               </span>
-              <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-1.5 leading-tight whitespace-pre-line">
-                {banner.title}
+              <h1 className="text-xl sm:text-4xl md:text-5xl font-black text-white mb-1.5 leading-tight">
+                {banner.title.replace('\n', ' ')}
               </h1>
               <p className={`text-base sm:text-lg md:text-xl font-black mb-2 ${banner.accentColor}`}>
                 {banner.highlight}
@@ -148,18 +148,18 @@ export function Home() {
           </div>
         </div>
 
-        {/* Prev / Next */}
+        {/* Prev / Next — positioned below content area on mobile to avoid overlap */}
         <button
           onClick={prevBanner}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/25 hover:bg-black/40 text-white rounded-full p-2 transition-colors backdrop-blur-sm"
+          className="absolute left-1.5 sm:left-4 bottom-10 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-1.5 sm:p-2 transition-colors backdrop-blur-sm"
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft size={16} />
         </button>
         <button
           onClick={nextBanner}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/25 hover:bg-black/40 text-white rounded-full p-2 transition-colors backdrop-blur-sm"
+          className="absolute right-1.5 sm:right-4 bottom-10 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-1.5 sm:p-2 transition-colors backdrop-blur-sm"
         >
-          <ChevronRight size={18} />
+          <ChevronRight size={16} />
         </button>
 
         {/* Dots */}
