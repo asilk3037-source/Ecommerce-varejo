@@ -36,79 +36,79 @@ export function Cart() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h1 className="text-lg sm:text-2xl font-bold text-gray-900">
           Carrinho ({itemCount} {itemCount === 1 ? 'item' : 'itens'})
         </h1>
         <button
           onClick={clearCart}
-          className="text-sm text-red-500 hover:text-red-600 font-medium flex items-center gap-1"
+          className="text-xs sm:text-sm text-red-500 hover:text-red-600 font-medium flex items-center gap-1"
         >
-          <Trash2 size={14} /> Limpar carrinho
+          <Trash2 size={13} /> Limpar
         </button>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Items */}
-        <div className="lg:col-span-2 space-y-3">
+        <div className="lg:col-span-2 space-y-2 sm:space-y-3">
           {items.map(({ product, quantity }) => (
-            <div key={product.id} className="card p-4 flex gap-4">
+            <div key={product.id} className="card p-3 sm:p-4 flex gap-3 sm:gap-4">
               <Link to={`/products/${product.id}`} className="flex-shrink-0">
                 <img
                   src={product.images[0]}
                   alt={product.name}
-                  className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg bg-gray-50"
+                  className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-lg bg-gray-50"
                 />
               </Link>
               <div className="flex-1 min-w-0">
                 <div className="flex gap-2 justify-between">
                   <div className="min-w-0">
-                    <p className="text-xs text-primary-600 font-medium">{product.brand}</p>
+                    <p className="text-[10px] sm:text-xs text-primary-600 font-medium">{product.brand}</p>
                     <Link to={`/products/${product.id}`}>
-                      <h3 className="text-sm font-semibold text-gray-900 hover:text-primary-700 line-clamp-2">
+                      <h3 className="text-xs sm:text-sm font-semibold text-gray-900 hover:text-primary-700 line-clamp-2">
                         {product.name}
                       </h3>
                     </Link>
                     {product.stock <= 5 && (
-                      <p className="text-xs text-orange-600 mt-1">Apenas {product.stock} em estoque</p>
+                      <p className="text-[10px] sm:text-xs text-orange-600 mt-0.5">Apenas {product.stock} em estoque</p>
                     )}
                   </div>
                   <button
                     onClick={() => removeItem(product.id)}
                     className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0 p-1"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={14} />
                   </button>
                 </div>
 
-                <div className="flex items-center justify-between mt-3">
+                <div className="flex items-center justify-between mt-2 sm:mt-3">
                   <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
                     <button
                       onClick={() => updateQuantity(product.id, quantity - 1)}
-                      className="px-2.5 py-1.5 hover:bg-gray-100 transition-colors"
+                      className="px-2 py-1 sm:px-2.5 sm:py-1.5 hover:bg-gray-100 transition-colors"
                     >
-                      <Minus size={14} />
+                      <Minus size={13} />
                     </button>
-                    <span className="px-3 py-1.5 text-sm font-semibold">{quantity}</span>
+                    <span className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold">{quantity}</span>
                     <button
                       onClick={() => updateQuantity(product.id, quantity + 1)}
                       disabled={quantity >= product.stock}
-                      className="px-2.5 py-1.5 hover:bg-gray-100 disabled:opacity-40 transition-colors"
+                      className="px-2 py-1 sm:px-2.5 sm:py-1.5 hover:bg-gray-100 disabled:opacity-40 transition-colors"
                     >
-                      <Plus size={14} />
+                      <Plus size={13} />
                     </button>
                   </div>
                   <div className="text-right">
                     {product.originalPrice && (
-                      <p className="text-xs text-gray-400 line-through">
+                      <p className="text-[10px] sm:text-xs text-gray-400 line-through">
                         {formatPrice(product.originalPrice * quantity)}
                       </p>
                     )}
-                    <p className="text-base font-bold text-primary-900">
+                    <p className="text-sm sm:text-base font-bold text-primary-900">
                       {formatPrice(product.price * quantity)}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-[10px] sm:text-xs text-gray-500">
                       {formatPrice(product.price)} cada
                     </p>
                   </div>
@@ -119,24 +119,24 @@ export function Cart() {
         </div>
 
         {/* Summary */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {/* Coupon */}
-          <div className="card p-4">
-            <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <Tag size={16} className="text-accent-500" /> Cupom de Desconto
+          <div className="card p-3 sm:p-4">
+            <h3 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+              <Tag size={15} className="text-accent-500" /> Cupom de Desconto
             </h3>
             <div className="flex gap-2">
               <input
                 type="text"
                 placeholder="Digite o cupom"
-                className="input-field text-sm flex-1"
+                className="input-field text-sm flex-1 py-2"
               />
-              <button className="btn-secondary text-sm py-2 px-4">Aplicar</button>
+              <button className="btn-secondary text-sm py-2 px-3 sm:px-4">Aplicar</button>
             </div>
           </div>
 
           {/* Order summary */}
-          <div className="card p-5 sticky top-24">
+          <div className="card p-4 sm:p-5 lg:sticky lg:top-24">
             <h3 className="font-bold text-gray-900 mb-4">Resumo do Pedido</h3>
 
             <div className="space-y-3 mb-4">
